@@ -1,25 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import Home from './Components/Home/Home';
+import LoginPage from './Components/LoginPage/LoginPage';
+import SignUpPage from './Components/SignInPage/SignUpPage';
+import NoAccess from './Components/UtilityComponents/NoAccess/NoAccess';
+import Wrapper from './Components/UtilityComponents/Wrapper/Wrapper';
+import { useAuthContext } from './Contexts/Authorisation/AuthContext';
+import { getUSER } from './Controllers/ManageLoginState';
+import { supabase } from './databaseClient';
+
 
 function App() {
+
+  const {isLoggedIn, setIsLoggedIn} = useAuthContext()
+
+  const checkIfIsLogged = async () => getUSER().then(data => 
+    setIsLoggedIn(data?.id ? true : false)
+  )
+
+  useEffect(() => {
+    !isLoggedIn ? checkIfIsLogged() : console.log("Not logged");
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Wrapper>
+        <Routes>
+
+          <Route element={!isLoggedIn && <SignUpPage />} path="/signup"/>
+          <Route element={!isLoggedIn && <LoginPage />} path="/login"/>
+          <Route element={isLoggedIn ? <Home /> : <NoAccess />} path="/"/>
+          
+
+        </Routes>
+      </Wrapper>
   );
 }
 

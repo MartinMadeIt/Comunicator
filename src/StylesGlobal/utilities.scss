@@ -1,0 +1,18 @@
+@import './variables.scss';
+
+@mixin fullSizeComponent {
+    min-width: 100vw;
+    min-height: 100vh;
+    background-color: $main-dark-bg;
+    color: $main-light-font;
+    font-family: $montserrat;
+    font-weight: 300;
+    font-size: 18px;
+    box-sizing: border-box;
+}
+
+@mixin center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,48 @@
+@import "../../../StylesGlobal/utilities.scss";
+
+
+.four0four {
+    font-family: $montserrat;
+    font-weight: 500;
+    font-size: 162px;
+    color: rgba(255, 255, 255, 0.265);
+
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    letter-spacing: 3px;
+}
+
+.bg {
+    width: 800px;
+    min-width: 400px;
+    @include center;
+    flex-direction: column;
+}
+
+.desc {
+    font-family: $montserrat;
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.616);
+    text-align: justify;
+}
+
+.go {
+    width: 150px;
+    height: 70px;
+    border-radius: 10px;
+    margin-top: 20px;
+
+    font-family: $montserrat;
+    font-size: 20px;
+
+    border: none;
+    background-color: rgb(104, 104, 255);
+    color: white;
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(.97);
+        background-color: rgb(46, 46, 255);
+    }
+}

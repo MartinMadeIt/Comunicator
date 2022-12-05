@@ -1,0 +1,17 @@
+
+.logoffBtn {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.591);
+    cursor: pointer;
+    z-index: 5;
+    background-color: transparent;
+    border: none;
+
+    &:hover {
+        color: rgb(255, 67, 67);
+        filter: drop-shadow(0 0 10px red);
+    }
+}

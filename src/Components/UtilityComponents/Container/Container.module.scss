@@ -1,0 +1,6 @@
+@import '../../../StylesGlobal/utilities.scss';
+
+.container {
+    @include fullSizeComponent;
+    @include center;
+}
