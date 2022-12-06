@@ -1,18 +1,17 @@
 import Container from '../UtilityComponents/Container/Container'
 import styles from './SignInPage.module.scss'
 
-import { Link, Navigate, redirect, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuthContext } from '../../Contexts/Authorisation/AuthContext'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { InferType } from 'yup'
 import { createUser } from '../../Controllers/createUser'
-import { supabase } from '../../databaseClient'
-import { getUSER, loader } from '../../Controllers/ManageLoginState'
+import { getUSER } from '../../Controllers/ManageLoginState'
 import { useEffect } from 'react'
 
 const signupSchema = yup.object({
-    user: yup.string().required(),
+    user: yup.string().required("User is required field"),
     email: yup.string().required(),
     firstName: yup.string().required(),
     lastName: yup.string().required(),
@@ -77,12 +76,12 @@ function SignInPage() {
             </div>
             <div className={styles.inputs}>
                 <form className={styles.form} onSubmit={signupFormik.handleSubmit}>
-                    <input type={"text"} name='user' onChange={signupFormik.handleChange} />
-                    <input type={"text"} name='email' onChange={signupFormik.handleChange} />
-                    <input type={"text"} name='firstName' onChange={signupFormik.handleChange} />
-                    <input type={"text"} name='lastName' onChange={signupFormik.handleChange} />
-                    <input type={"password"} name='password'onChange={signupFormik.handleChange} />
-                    <input type={"password"} name='password2'onChange={signupFormik.handleChange} />
+                    <input type={"text"} name='user' onChange={signupFormik.handleChange} placeholder={'Username'}/>
+                    <input type={"text"} name='email' onChange={signupFormik.handleChange} placeholder={'E-mail'}/>
+                    <input type={"text"} name='firstName' onChange={signupFormik.handleChange} placeholder={'First name'}/>
+                    <input type={"text"} name='lastName' onChange={signupFormik.handleChange} placeholder={'Last name'}/>
+                    <input type={"password"} name='password'onChange={signupFormik.handleChange} placeholder={'Password'}/>
+                    <input type={"password"} name='password2'onChange={signupFormik.handleChange} placeholder={'Repeat password'}/>
                     <button type='submit' className={styles.submit}>Submit</button>
                 </form>
 

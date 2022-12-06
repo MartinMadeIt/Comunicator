@@ -3,7 +3,7 @@
 .layout {
     margin-top: 10px;
     margin-bottom: 40px;
-    height: 90vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -11,18 +11,17 @@
 }
 
 .boxField {
-
-    min-width: 400px;
-    width: fit-content;
+   
+    min-width: 600px;
     padding: 15px 70px;
     overflow: scroll;
     @include center;
     flex-direction: column;
     justify-content: flex-start;
     gap: 35px;
-    border: 1px solid rgba(156, 156, 156, 0.114);
-    height: 80%;
+    height: 90%;
     min-height: 600px;
+    
 }
 
 .inputMessage {
@@ -39,7 +38,7 @@
         border-radius: 20px;
 
         border-radius: 12px;
-        background: #dbdbdb;
+        background: #dbdbdb91;
         border: none;
         padding: 5px 50px 5px 5px;
 
@@ -78,9 +77,10 @@
 
 .accountUsername {
     position: absolute;
-    top: 0;
+    top: 5px;
     left: 0;
-    height: 100vh;
+    height: 10vh;
+    width: 100vw;
     padding: 0px;
     @include center;
 
@@ -89,9 +89,6 @@
     color: rgba(128, 128, 128, 0.552);
     font-family: $montserrat;
 
-
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
 }
 
 .pauseButton,
@@ -108,4 +105,87 @@
 
 .pauseButtonActive {
     color: red;
+}
+
+@media screen and (min-width: 900px) {
+    .inputMessage {
+        position: relative;
+        height: 70px;
+        width: 400px;
+        @include center;
+
+        textarea {
+            width: 100%;
+            height: 100%;
+
+            padding: 5px 50px 5px 5px; 
+        }
+    }
+    .accountUsername {
+        position: absolute;
+        top: 17px;
+        left: 0;
+        height: 100vh;
+        width: 50px;
+        
+        padding: 0px;
+        @include center;
+    
+        font-size: 26px;
+        letter-spacing: 2px;
+        color: rgba(128, 128, 128, 0.552);
+        font-family: $montserrat;
+    
+    
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .layout {
+        width: 100%;
+        height: 100%;
+        padding-top: 10%;
+
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 0;
+    }
+
+    .boxField {
+        width: 100vw;
+        height: 80%;
+        margin-bottom: 0;
+    }
+
+    .inputMessage {
+        margin: 0;
+        height: 10%;
+    }
+}
+
+@media screen and (min-width: 500px) {
+    .layout {
+        width: 100vw;
+        height: 100vh;
+        padding-top: 10vh;
+
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 0;
+    }
+
+    .boxField {
+        padding: 0;
+        margin: 0;
+        min-width: 500px;
+        height: 300px;
+        margin-bottom: 0;
+    }
+
+    .inputMessage {
+        margin: 0;
+        height: 10vh;
+    }
 }

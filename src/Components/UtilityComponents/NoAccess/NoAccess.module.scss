@@ -2,15 +2,15 @@
 
 
 .four0four {
-    font-family: $montserrat;
+    font-family: $montserrat-alt;
     font-weight: 500;
-    font-size: 162px;
+    font-size: 64px;
     color: rgba(255, 255, 255, 0.265);
 
     position: absolute;
     top: 20px;
     left: 20px;
-    letter-spacing: 3px;
+    letter-spacing: 1px;
 }
 
 .bg {
@@ -21,28 +21,24 @@
 }
 
 .desc {
-    font-family: $montserrat;
+    font-family: $montserrat-alt;
+    width: 400px;
     font-size: 24px;
     color: rgba(255, 255, 255, 0.616);
     text-align: justify;
 }
 
+.actions {
+    @include center;
+    gap: 20px;
+}
+
 .go {
-    width: 150px;
-    height: 70px;
-    border-radius: 10px;
-    margin-top: 20px;
-
-    font-family: $montserrat;
-    font-size: 20px;
-
-    border: none;
+    @include noAccesButtons;
     background-color: rgb(104, 104, 255);
-    color: white;
-    cursor: pointer;
 
     &:hover {
         transform: scale(.97);
-        background-color: rgb(46, 46, 255);
+
     }
 }

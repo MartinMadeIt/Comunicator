@@ -1,7 +1,7 @@
 import Container from "../UtilityComponents/Container/Container"
 import Logoff from "../UtilityComponents/Logoff/Logoff"
 import { fetchAllRows } from "../../Controllers/FilterAPI"
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import MessageBox from "../UtilityComponents/MessageBox/MessageBox";
 import styles from "./Home.module.scss"
 import { getThisUsername, getUSER, sendMessage } from "../../Controllers/ManageLoginState";
@@ -33,10 +33,16 @@ function Home() {
   const [refresh, setRefresh] = useState(false)
   const [pause, setPause] = useState(false)
 
+  const bottom = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    bottom.current?.scrollIntoView({behavior: 'smooth'})
+  }, [data])
+
   useEffect(() => {
     fetchAllRows<Messages[]>('messages').then(data => {
-      console.log(data)
-      setData(data)})
+      setData(data)
+    })
   }, [refresh])
 
   useEffect(() => {
@@ -87,6 +93,10 @@ function Home() {
     return `${unformatted.getDate()}-${unformatted.getMonth()+1}-${unformatted.getFullYear()} \t ${unformatted.getHours()}:${unformatted.getMinutes()}`
   }
 
+ 
+
+
+
   return (
     <Container>
         <Logoff />
@@ -95,15 +105,22 @@ function Home() {
 
         <div className={styles.layout}>
 
-          <div className={styles.boxField}>
+          <div className={styles.boxField} id="boxField">
             {data.map((element, index) => 
-            <MessageBox 
+            {
+              
+              return (
+              <MessageBox 
               username={userId === element.user_id  ? "You" : String(element.username)} 
               message={element.comment ? element.comment : ""} 
               createdAt={element.created_at ? String(getFormattedDate(element.created_at)) : ""} 
               isAuthor={userId === element.user_id}
               key = {index}
-            />)} 
+              />
+              
+            )}
+            )} 
+            <div ref={bottom} />
           </div>
 
           <form className={styles.inputMessage} onSubmit={messageFormik.handleSubmit}>

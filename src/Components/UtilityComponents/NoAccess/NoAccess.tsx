@@ -6,9 +6,13 @@ function NoAccess() {
   return (
     <Container>
         <div className={styles.bg}>
-            <p className={styles.four0four}>404</p>
-            <p className={styles.desc}>Hello Visitor ! You're trying to reach something unreachable ! Site not exist or you just have to login !</p>
-            <Link to='/login'><button className={styles.go}>Go to login</button></Link>
+            <p className={styles.four0four}>Hello user !</p>
+            <p className={styles.desc}>It seems that you're trying to reach messages that are reserved only to registered users ! </p>
+
+            <div className={styles.actions}>
+              <Link to='/login'><button className={styles.go}>Login</button></Link>
+              <Link to='/signup'><button className={styles.go}>Register</button></Link>
+            </div>
         </div>
     </Container>
   )
