@@ -26,7 +26,7 @@ export type SignupFormValues = InferType<typeof signupSchema>
 function SignInPage() {
 
   const navigate = useNavigate()
-  const {isLoggedIn, setIsLoggedIn} = useAuthContext()
+  const {setIsLoggedIn} = useAuthContext()
 
   const checkIfIsOK = async () => getUSER().then(data =>
     {
@@ -60,8 +60,8 @@ function SignInPage() {
         password: values.password,
         password2: values.password2
       });
-      setIsLoggedIn(true)
       checkIfIsOK()
+      navigate("/login")
     },
     validationSchema: signupSchema
   })

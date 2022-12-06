@@ -127,7 +127,7 @@
         left: 0;
         height: 100vh;
         width: 50px;
-        
+
         padding: 0px;
         @include center;
     
@@ -182,6 +182,10 @@
         min-width: 500px;
         height: 300px;
         margin-bottom: 0;
+
+        div {
+            margin-top: 10px;
+        }
     }
 
     .inputMessage {
