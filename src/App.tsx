@@ -4,12 +4,10 @@ import './App.css';
 import Home from './Components/Home/Home';
 import LoginPage from './Components/LoginPage/LoginPage';
 import SignUpPage from './Components/SignInPage/SignUpPage';
-import Input from './Components/UtilityComponents/Input/Input';
 import NoAccess from './Components/UtilityComponents/NoAccess/NoAccess';
 import Wrapper from './Components/UtilityComponents/Wrapper/Wrapper';
 import { useAuthContext } from './Contexts/Authorisation/AuthContext';
 import { getUSER } from './Controllers/ManageLoginState';
-import { supabase } from './databaseClient';
 
 
 function App() {

@@ -6,22 +6,13 @@ import 'react-notifications-component/dist/scss/notification.scss'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuthContext } from '../../Contexts/Authorisation/AuthContext'
 import { useFormik } from 'formik'
-import * as yup from 'yup'
 import { InferType } from 'yup'
 import { createUser } from '../../Controllers/createUser'
 import { getUSER } from '../../Controllers/ManageLoginState'
 import { useEffect } from 'react'
 import Input from '../UtilityComponents/Input/Input'
 import { Store } from 'react-notifications-component'
-
-const signupSchema = yup.object({
-    user: yup.string().required(),
-    email: yup.string().email().required(),
-    firstName: yup.string().required(),
-    lastName: yup.string().required(),
-    password: yup.string().required(),
-    password2: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match')
-})
+import { signupSchema } from '../../yupSchemas'
 
 
 

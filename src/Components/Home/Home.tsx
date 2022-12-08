@@ -8,22 +8,9 @@ import { getThisUsername, getUSER, sendMessage } from "../../Controllers/ManageL
 import { useFormik } from "formik";
 import { FiSend } from "react-icons/fi";
 import { CiPause1 } from "react-icons/ci";
+import { Messages } from "../../types";
 
-interface Users {
-  user_id: string   /* primary key */;
-  username: string;
-  first_name: string;
-  last_name: string;
-  avatar?: string;
-};
 
-interface Messages {
-  user_id: string   /* primary key */;
-  created_at?: string;
-  comment?: string;
-  username?: string   /* foreign key to users.username */;
-  users?: Users;
-};
 
 function Home() {
 
@@ -35,7 +22,6 @@ function Home() {
   const [countOfDS, setCountOfDS] = useState<number>()
 
   const bottom = useRef<HTMLDivElement>(null);
-  const top = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     bottom.current?.scrollIntoView({behavior: 'smooth'})
@@ -58,16 +44,6 @@ function Home() {
   useEffect(() => {
     getTheCount<number>('messages').then(data => setCountOfDS(data))
   }, [refresh])
-
-  // useEffect(() => {
-  //   getUSER().then(data => 
-  //       setUserId(data?.id ? data.id : "")
-  //     )
-  // }, [])
-
-  // useEffect(() => {
-  //   getThisUsername(userId).then(data => setUsername(data ? data[0].username : ""))
-  // }, [])
 
 
   /*  Wyciąganie username na podstawie user_id  */
@@ -101,9 +77,6 @@ function Home() {
     const unformatted = new Date(date)
     return `${unformatted.getDate()}-${unformatted.getMonth()+1}-${unformatted.getFullYear()} \t ${unformatted.getHours()}:${unformatted.getMinutes()}`
   }
-
- 
-
 
 
   return (
