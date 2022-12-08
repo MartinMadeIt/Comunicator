@@ -61,3 +61,7 @@
         margin: 0;
     }
 }
+
+@media only screen and (max-height: 650px) {
+    @include changeToMobileView;
+}

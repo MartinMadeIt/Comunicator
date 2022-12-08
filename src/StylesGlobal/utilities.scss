@@ -109,3 +109,26 @@
     position: absolute;
     bottom: -7px;
 }
+
+
+@mixin changeToMobileView {
+    .change {
+        p {
+            display: none;
+        }
+        a {
+            position: absolute;
+            top: 90px;
+            left: 30px;
+        }
+    }
+
+    form {
+        transform: translateY(-40px);
+    }
+
+    .submit {
+        margin-top: 10px;
+        height: 60px;
+    }
+}
