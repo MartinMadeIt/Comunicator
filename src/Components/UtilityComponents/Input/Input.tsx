@@ -8,6 +8,7 @@ export interface InputInterface<T> {
     name: keyof T,
     type: 'text' | 'password',
     placeholder: string
+    value?:string
 }
 
 const notify = ({title, type, message}:{title:string, type:NOTIFICATION_TYPE, message:string}) => {
@@ -28,7 +29,7 @@ const notify = ({title, type, message}:{title:string, type:NOTIFICATION_TYPE, me
 
 const returnError = (field:string) => <p>{field} is a required field</p>
 
-function Input<T>({formik, name, type, placeholder}:InputInterface<T>) {
+function Input<T>({formik, name, type, placeholder, value}:InputInterface<T>) {
   return (
         <input 
             type= {type}
@@ -36,6 +37,7 @@ function Input<T>({formik, name, type, placeholder}:InputInterface<T>) {
             placeholder = {placeholder}
             onChange = {formik.handleChange}
             className={styles.input}
+            value={value}
         />
 
   )

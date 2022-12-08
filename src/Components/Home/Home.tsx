@@ -87,12 +87,13 @@ function Home() {
 
   const messageFormik = useFormik({
     initialValues : messageFormikInitialValues, 
-    onSubmit: (values) => {
+    onSubmit: (values, {resetForm}) => {
       sendMessage(
         userId,
         username,
         values.message
     )
+    resetForm()
     }
   })
 
@@ -132,7 +133,7 @@ function Home() {
           </div>
 
           <form className={styles.inputMessage} onSubmit={messageFormik.handleSubmit}>
-            <textarea name="message" className={styles.textArea} cols={50} rows={1} maxLength={600} onChange={messageFormik.handleChange} />
+            <textarea name="message" className={styles.textArea} value={messageFormik.values.message} cols={50} rows={1} maxLength={600} onChange={messageFormik.handleChange} />
             <button type="submit" className={styles.submit}><FiSend/></button>
           </form>
 
