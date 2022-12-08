@@ -77,7 +77,7 @@ function SignInPage() {
           onScreen: true
           }
         })
-        return resetForm()
+        resetForm({values:signupFormik.initialValues})
     },
     validationSchema: signupSchema
   })
@@ -92,12 +92,12 @@ function SignInPage() {
             </div>
             <div className={styles.inputs}>
                 <form className={styles.form} onSubmit={signupFormik.handleSubmit}>
-                    <Input type={"text"} name='user' formik={signupFormik} placeholder={'Username'}/>
-                    <Input type={"text"} name='email' formik={signupFormik} placeholder={'E-mail'}/>
-                    <Input type={"text"} name='firstName' formik={signupFormik} placeholder={'First name'}/>
-                    <Input type={"text"} name='lastName' formik={signupFormik} placeholder={'Last name'}/>
-                    <Input type={"password"} name='password'formik={signupFormik} placeholder={'Password'}/>
-                    <Input type={"password"} name='password2'formik={signupFormik} placeholder={'Repeat password'}/>
+                    <Input type={"text"} name='user' formik={signupFormik} placeholder={'Username'} value={signupFormik.values.user} />
+                    <Input type={"text"} name='email' formik={signupFormik} placeholder={'E-mail'} value={signupFormik.values.email} />
+                    <Input type={"text"} name='firstName' formik={signupFormik} placeholder={'First name'} value={signupFormik.values.firstName} />
+                    <Input type={"text"} name='lastName' formik={signupFormik} placeholder={'Last name'} value={signupFormik.values.lastName} />
+                    <Input type={"password"} name='password'formik={signupFormik} placeholder={'Password'} value={signupFormik.values.password} />
+                    <Input type={"password"} name='password2'formik={signupFormik} placeholder={'Repeat password'} value={signupFormik.values.password2} />
                     <button type='submit' className={styles.submit}>Submit</button>
                 </form>
 
