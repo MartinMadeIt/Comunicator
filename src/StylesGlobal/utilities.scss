@@ -38,3 +38,74 @@
     cursor: pointer;
     color: white;
 }
+
+@mixin submitBtn {
+    margin-top: 60px;
+    width: 130px;
+    height: 60px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 89, 0, 0.529);
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.474);
+    font-family: $montserrat;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 250ms;
+
+    &:hover {
+        color: white;
+        background-image: linear-gradient(to top right, rgba(255, 166, 0, 0.544), rgba(255, 0, 0, 0.564));
+        border: none;
+    }
+}
+
+@mixin cardForm {
+    padding: 20px;
+    width: 100vw;
+    height: 100vh;
+    @include center;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: $montserrat;
+}
+
+@mixin inputsForm {
+    width: 100%;
+    height: 60%;
+
+    form {
+        width: 100%;
+        height: 100%;
+        @include center;
+        gap: 20px;
+        flex-direction: column;
+        justify-content: space-evenly;
+
+    }
+}
+
+@mixin actionButtons {
+    position: absolute;
+
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.591);
+    cursor: pointer;
+    z-index: 5;
+    background-color: transparent;
+    border: none;
+
+    &:hover {
+        color: rgb(255, 67, 67);
+        filter: drop-shadow(0 0 10px red);
+    }
+}
+
+
+@mixin beforeMessage {
+    width: 18px;
+    height: 18px;
+    content: '';
+    border-radius: 50%;
+    position: absolute;
+    bottom: -7px;
+}

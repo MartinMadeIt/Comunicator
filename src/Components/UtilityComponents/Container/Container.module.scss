@@ -3,6 +3,5 @@
 
 .container {
     @include fullSizeComponent;
-    // @include mobileComponent;
     @include center;
 }

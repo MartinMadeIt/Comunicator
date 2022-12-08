@@ -25,6 +25,5 @@ export const createUser = async (user: SignupFormValues) => {
 
     const insert = await insertUser(data.user.id, user)
 
-    
     return data
   }

@@ -14,7 +14,15 @@ import { supabase } from '../databaseClient'
     const {data} = await supabase
       .from(`${table}`)
       .select(`*`)
+      .order('message_id', { ascending: true })
     return data as T 
+  }
+  
+ export async function getTheCount<T>(table:string) {
+  const { data, count } = await supabase
+    .from(table)
+    .select('*', { count: 'exact' })
+    return count as T 
   }
   
 

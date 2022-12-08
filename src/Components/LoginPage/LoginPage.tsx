@@ -9,6 +9,7 @@ import { Store } from 'react-notifications-component';
 import { useFormik } from 'formik'
 import { supabase } from '../../databaseClient'
 import { getUSER } from '../../Controllers/ManageLoginState'
+import Input from '../UtilityComponents/Input/Input'
 
   
   
@@ -75,15 +76,12 @@ function LoginPage() {
         <ReactNotifications />
         <div className={styles.card}>
             <div className={styles.desc}>
-                {/* <button onClick={async () => getUSER().then(data =>
-                    data?.id ? setIsLoggedIn(true) : setIsLoggedIn(false)
-                    )}>GET</button> */}
                 <p>LOG IN</p>
             </div>
             <div className={styles.inputs}>
                 <form className={styles.form} onSubmit={signinFormik.handleSubmit}>
-                    <input type="text" name='email' onChange={signinFormik.handleChange}/>
-                    <input type="password" name='password' onChange={signinFormik.handleChange}/>
+                    <Input type="text" name='email' formik={signinFormik} placeholder='E-mail' />
+                    <Input type="password" name='password' formik={signinFormik} placeholder='Password' />
                     <button type='submit' className={styles.submit}>Submit</button>
                 </form>
 

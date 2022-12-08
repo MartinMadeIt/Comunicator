@@ -1,16 +1,8 @@
 @import '../../StylesGlobal/utilities.scss';
 
+
 .card {
-    padding: 20px;
-    width: 400px;
-    height: 600px;
-    border-radius: 12px;
-    @include center;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: rgba(255, 255, 255, 0.103);
-    border: 1px solid rgba(255, 255, 255, 0.292);
-    font-family: $montserrat;
+    @include cardForm;
 }
 
 .desc {
@@ -35,55 +27,12 @@
 
 
 .inputs {
-    width: 100%;
-    height: 60%;
-
-    form {
-        width: 100%;
-        height: 100%;
-        @include center;
-        flex-direction: column;
-        justify-content: space-evenly;
-
-        input {
-            font-family: $montserrat;
-            font-weight: 300;
-            text-align: center;
-            font-size: 16px;
-            width: 70%;
-            height: 60px;
-            border-radius: 8px;
-            background-color: rgba(255, 255, 255, 0.13);
-            border: 1px solid rgb(105, 105, 105);
-            color: rgba(255, 255, 255, 0.391);
-            margin-bottom: 10px;
-
-        }
-
-        input:focus {
-            outline: none ;
-            box-shadow: inset 0 0 2px rgb(255, 0, 0);
-        }
-    }
+    @include inputsForm;
 }
 
-.submit {
-    margin-top: 60px;
-    width: 70%;
-    height: 60px;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 0, 0, 0.529);
-    background-color: transparent;
-    color: rgba(255, 255, 255, 0.27);
-    font-family: $montserrat;
-    font-size: 20px;
-    cursor: pointer;
-    transition: 250ms;
 
-    &:hover {
-        color: white;
-        border: 1px solid rgb(255, 0, 0);
-    }
+.submit {
+    @include submitBtn;
 }
 
 .change {

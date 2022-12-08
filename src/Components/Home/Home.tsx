@@ -1,6 +1,6 @@
 import Container from "../UtilityComponents/Container/Container"
 import Logoff from "../UtilityComponents/Logoff/Logoff"
-import { fetchAllRows } from "../../Controllers/FilterAPI"
+import { fetchAllRows, getTheCount } from "../../Controllers/FilterAPI"
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import MessageBox from "../UtilityComponents/MessageBox/MessageBox";
 import styles from "./Home.module.scss"
@@ -32,25 +32,32 @@ function Home() {
   const [username, setUsername] = useState("")
   const [refresh, setRefresh] = useState(false)
   const [pause, setPause] = useState(false)
+  const [countOfDS, setCountOfDS] = useState<number>()
 
   const bottom = useRef<HTMLDivElement>(null);
+  const top = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     bottom.current?.scrollIntoView({behavior: 'smooth'})
   }, [data])
 
   useEffect(() => {
+    if(countOfDS !== data.length) {
     fetchAllRows<Messages[]>('messages').then(data => {
       setData(data)
-    })
-  }, [refresh])
+    })}
+  }, [countOfDS])
 
   useEffect(() => {
     if(!pause)
     {setTimeout(() => {
       setRefresh(!refresh)
-    }, 2000)}
+    }, 500)}
   }, [refresh, pause])
+
+  useEffect(() => {
+    getTheCount<number>('messages').then(data => setCountOfDS(data))
+  }, [refresh])
 
   // useEffect(() => {
   //   getUSER().then(data => 
@@ -74,11 +81,12 @@ function Home() {
 
   useEffect(() => {getUserID()},[])
 
+  const messageFormikInitialValues = {
+    message : ""
+  }
 
   const messageFormik = useFormik({
-    initialValues : {
-      message : ""
-    }, 
+    initialValues : messageFormikInitialValues, 
     onSubmit: (values) => {
       sendMessage(
         userId,
@@ -100,31 +108,31 @@ function Home() {
   return (
     <Container>
         <Logoff />
-        <p className={styles.accountUsername}>{username}</p>
         <button onClick={() => setPause(!pause)} className={!pause ? styles.pauseButton : styles.pauseButtonActive}><CiPause1 /></button>
 
         <div className={styles.layout}>
 
+          <p className={styles.accountUsername}>{username}</p>
           <div className={styles.boxField} id="boxField">
+
             {data.map((element, index) => 
-            {
-              
+            {    
               return (
-              <MessageBox 
-              username={userId === element.user_id  ? "You" : String(element.username)} 
-              message={element.comment ? element.comment : ""} 
-              createdAt={element.created_at ? String(getFormattedDate(element.created_at)) : ""} 
-              isAuthor={userId === element.user_id}
-              key = {index}
-              />
-              
-            )}
+                <MessageBox 
+                username={userId === element.user_id  ? "You" : String(element.username)} 
+                message={element.comment ? element.comment : ""} 
+                createdAt={element.created_at ? String(getFormattedDate(element.created_at)) : ""} 
+                isAuthor={userId === element.user_id}
+                key = {index}
+                />
+              )
+            }
             )} 
             <div ref={bottom} />
           </div>
 
           <form className={styles.inputMessage} onSubmit={messageFormik.handleSubmit}>
-            <textarea name="message" className={styles.textArea} cols={50} rows={1} maxLength={600} onChange={messageFormik.handleChange}/>
+            <textarea name="message" className={styles.textArea} cols={50} rows={1} maxLength={600} onChange={messageFormik.handleChange} />
             <button type="submit" className={styles.submit}><FiSend/></button>
           </form>
 

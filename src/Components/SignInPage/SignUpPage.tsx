@@ -1,5 +1,7 @@
 import Container from '../UtilityComponents/Container/Container'
 import styles from './SignInPage.module.scss'
+import { ReactNotifications } from 'react-notifications-component'
+import 'react-notifications-component/dist/scss/notification.scss'
 
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuthContext } from '../../Contexts/Authorisation/AuthContext'
@@ -9,10 +11,12 @@ import { InferType } from 'yup'
 import { createUser } from '../../Controllers/createUser'
 import { getUSER } from '../../Controllers/ManageLoginState'
 import { useEffect } from 'react'
+import Input from '../UtilityComponents/Input/Input'
+import { Store } from 'react-notifications-component'
 
 const signupSchema = yup.object({
-    user: yup.string().required("User is required field"),
-    email: yup.string().required(),
+    user: yup.string().required(),
+    email: yup.string().email().required(),
     firstName: yup.string().required(),
     lastName: yup.string().required(),
     password: yup.string().required(),
@@ -41,7 +45,6 @@ function SignInPage() {
     checkIfIsOK()
   }, [])
 
-
   const signupFormik = useFormik<SignupFormValues>({
     initialValues: {
       user: "",
@@ -51,37 +54,50 @@ function SignInPage() {
       password: "",
       password2: ""
     },
-    onSubmit: (values) => {
-      createUser({
-        user: values.user,
-        email: values.email,
-        firstName: values.firstName,
-        lastName: values.lastName,
-        password: values.password,
-        password2: values.password2
-      });
-      checkIfIsOK()
-      navigate("/login")
+    onSubmit:  (values, {resetForm}) => {
+        createUser({
+          user: values.user,
+          email: values.email,
+          firstName: values.firstName,
+          lastName: values.lastName,
+          password: values.password,
+          password2: values.password2
+        });
+
+        Store.addNotification({
+          title: "Great !",
+          message: "Now check your email and click confirmation link. After that you will be able to log in",
+          type: "success",
+          insert: "top",
+          container: "top-left",
+          animationIn: ["animate__animated", "animate__fadeIn"],
+          animationOut: ["animate__animated", "animate__fadeOut"],
+          dismiss: {
+          duration: 4000,
+          onScreen: true
+          }
+        })
+        return resetForm()
     },
     validationSchema: signupSchema
   })
 
 
-
   return (
     <Container>
+      <ReactNotifications />
         <div className={styles.card}>
             <div className={styles.desc}>
                 <p>SIGN UP</p> 
             </div>
             <div className={styles.inputs}>
                 <form className={styles.form} onSubmit={signupFormik.handleSubmit}>
-                    <input type={"text"} name='user' onChange={signupFormik.handleChange} placeholder={'Username'}/>
-                    <input type={"text"} name='email' onChange={signupFormik.handleChange} placeholder={'E-mail'}/>
-                    <input type={"text"} name='firstName' onChange={signupFormik.handleChange} placeholder={'First name'}/>
-                    <input type={"text"} name='lastName' onChange={signupFormik.handleChange} placeholder={'Last name'}/>
-                    <input type={"password"} name='password'onChange={signupFormik.handleChange} placeholder={'Password'}/>
-                    <input type={"password"} name='password2'onChange={signupFormik.handleChange} placeholder={'Repeat password'}/>
+                    <Input type={"text"} name='user' formik={signupFormik} placeholder={'Username'}/>
+                    <Input type={"text"} name='email' formik={signupFormik} placeholder={'E-mail'}/>
+                    <Input type={"text"} name='firstName' formik={signupFormik} placeholder={'First name'}/>
+                    <Input type={"text"} name='lastName' formik={signupFormik} placeholder={'Last name'}/>
+                    <Input type={"password"} name='password'formik={signupFormik} placeholder={'Password'}/>
+                    <Input type={"password"} name='password2'formik={signupFormik} placeholder={'Repeat password'}/>
                     <button type='submit' className={styles.submit}>Submit</button>
                 </form>
 

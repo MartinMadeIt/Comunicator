@@ -42,3 +42,20 @@
 
     }
 }
+
+@media screen and (max-width: 400px) {
+
+.four0four {
+    font-size: 40px;
+}
+
+.desc {
+    width: 300px;
+    font-size: 16px;
+}
+
+.go {
+    transform: scale(.75);
+}
+
+}

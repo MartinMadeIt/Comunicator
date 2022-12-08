@@ -1,0 +1,25 @@
+@import "../../../StylesGlobal/utilities.scss";
+
+
+.input {
+    position: relative;
+    font-family: $montserrat;
+    position: relative;
+    box-sizing: border-box;
+    width: 298px;
+    height: 48px;
+    background-color: transparent;
+    border-radius: 10px;
+    border: none;
+    border-bottom: 1px solid orange;
+    padding: 5px;
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.666);
+    transition: 400ms;
+
+    &:focus {
+        outline: none;
+        border: 1px solid orange;
+    }
+
+}

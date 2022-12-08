@@ -1,195 +1,121 @@
-@import "../../StylesGlobal/utilities.scss";
+@import "../.././StylesGlobal/utilities.scss";
+
+* {
+    box-sizing: border-box;
+    font-family: $montserrat;
+}
+
+.pauseButton {
+    @include actionButtons;
+    top: 30px;
+    left: 30px;
+}
+
+.pauseButtonActive {
+    @include actionButtons;
+    top: 30px;
+    left: 30px;
+    color: red;
+}
 
 .layout {
-    margin-top: 10px;
-    margin-bottom: 40px;
+    width: 100vw;
     height: 100vh;
+    padding: 10px 20px;
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
 }
 
-.boxField {
-   
-    min-width: 600px;
-    padding: 15px 70px;
-    overflow: scroll;
-    @include center;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 35px;
-    height: 90%;
-    min-height: 600px;
-    
+.accountUsername {
+    font-size: 36px;
+    color: rgba(255, 255, 255, .5);
+    width: 100vw;
+    height: 5vh;
+    text-align: center;
 }
+
+.boxField {
+    overflow: auto;
+    padding: 20px 10px;
+    width: 700px;
+    height: 80vh;
+    @include center;
+
+    flex-direction: column;
+    gap: 30px;
+}
+
 
 .inputMessage {
     position: relative;
-    min-height: 50px;
-    width: 70%;
+    width: 700px;
+    height: 8vh;
+    background-color: $main-dark-bg;
     @include center;
+}
 
+.textArea {
+    position: relative;
+    width: 700px;
+    height: 100%;
+    resize: none;
+    border-radius: 20px;
+    padding: 10px 50px 5px 10px;
+    font-size: 20px;
 
-    textarea {
-        font-family: $montserrat;
-        width: 100%;
-        height: 100%;
-        border-radius: 20px;
-
-        border-radius: 12px;
-        background: #dbdbdb91;
-        border: none;
-        padding: 5px 50px 5px 5px;
-
-        resize: none;
-
-        &:focus {
-            outline: none;
-            box-shadow: inset 0px 0px 10px rgba(0, 0, 255, 0.595);
-        }
-    }
-
-    .submit {
-        position: absolute;
-        top: 10%;
-        right: 5px;
-        width: 40px;
-        height: 40px;
-        font-size: 20px;
-        @include center;
-        border: none;
-        color: white;
-
-        border-radius: 50%;
-        background: #0084ff;
-        box-shadow: inset 11px 11px 11px #0066c4,
-            inset -11px -11px 11px #00a2ff;
-        cursor: pointer;
-
-        &:hover {
-            background: #004c93;
-            box-shadow: inset 11px 11px 11px #01427f,
-                inset -11px -11px 11px #0178bc;
-        }
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 10px blue;
     }
 }
 
-.accountUsername {
+.submit {
     position: absolute;
-    top: 5px;
-    left: 0;
-    height: 10vh;
-    width: 100vw;
-    padding: 0px;
-    @include center;
-
+    right: 0px;
+    top: 0;
+    height: 100%;
+    width: 40px;
     font-size: 26px;
-    letter-spacing: 2px;
-    color: rgba(128, 128, 128, 0.552);
-    font-family: $montserrat;
-
-}
-
-.pauseButton,
-.pauseButtonActive {
-    position: absolute;
-    top: 30px;
-    left: 10px;
-    font-size: 18px;
-    color: grey;
+    @include center;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
     border: none;
-    background-color: transparent;
+    background-color: rgb(0, 128, 255);
+    color: white;
+    text-shadow: 0px 0px 10px black;
+    transition: 250ms;
     cursor: pointer;
-}
 
-.pauseButtonActive {
-    color: red;
-}
-
-@media screen and (min-width: 900px) {
-    .inputMessage {
-        position: relative;
-        height: 70px;
-        width: 400px;
-        @include center;
-
-        textarea {
-            width: 100%;
-            height: 100%;
-
-            padding: 5px 50px 5px 5px; 
-        }
+    &:hover {
+        background-color: rgb(0, 21, 255);
     }
+
+    &:active {
+        background-color: rgb(0, 21, 255);
+        color: rgb(61, 174, 255);
+    }
+}
+
+@media only screen and (max-width: 700px) {
+
     .accountUsername {
-        position: absolute;
-        top: 17px;
-        left: 0;
-        height: 100vh;
-        width: 50px;
-
-        padding: 0px;
-        @include center;
-    
-        font-size: 26px;
-        letter-spacing: 2px;
-        color: rgba(128, 128, 128, 0.552);
-        font-family: $montserrat;
-    
-    
-        writing-mode: vertical-rl;
-        text-orientation: mixed;
-    }
-}
-
-@media screen and (min-width: 600px) {
-    .layout {
-        width: 100%;
-        height: 100%;
-        padding-top: 10%;
-
-        flex-direction: column;
-        justify-content: space-between;
-        gap: 0;
+        font-size: 20px;
     }
 
     .boxField {
         width: 100vw;
-        height: 80%;
-        margin-bottom: 0;
+        font-size: 10px;
     }
 
     .inputMessage {
-        margin: 0;
-        height: 10%;
-    }
-}
-
-@media screen and (min-width: 500px) {
-    .layout {
         width: 100vw;
-        height: 100vh;
-        padding-top: 10vh;
-
-        flex-direction: column;
-        justify-content: space-between;
-        gap: 0;
-    }
-
-    .boxField {
-        padding: 0;
-        margin: 0;
-        min-width: 500px;
-        height: 300px;
-        margin-bottom: 0;
-
-        div {
-            margin-top: 10px;
+        border-radius: 0%;
+        
+        .textArea {
+            font-size: 14px;
         }
-    }
-
-    .inputMessage {
-        margin: 0;
-        height: 10vh;
     }
 }
