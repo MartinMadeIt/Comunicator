@@ -60,6 +60,6 @@
     }
 }
 
-@media only screen and (max-height: 650px) {
+@media only screen and (max-height: 750px) {
     @include changeToMobileView;
 }
