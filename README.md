@@ -39,7 +39,7 @@
 <br>
 
 # ToDos 
-* Pagination or filtering only last 20 messages - to improve performance of an App
-* Styles fix - for now media queries are only available over 500px. Under this value content may be displayed incorrectly
+* Styles fix - I will test this App on different devices, try to catch style bugs and handle it
 * Styles add - This project was mainly developed for training SQL skills so styles was just the background. But as Frontend Dev - I don't want to leave it like that.
-* Features - some extras
+* Direct message - I'm working on DS structure that will allow users to join private chats
+* Users online feature - indicator or list that show user how much (or username of) users online
