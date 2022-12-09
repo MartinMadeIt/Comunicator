@@ -17,6 +17,16 @@ import { supabase } from '../databaseClient'
       .order('message_id', { ascending: true })
     return data as T 
   }
+// To zmienione
+ export async function fetchSomeRows<T>(table:string, ammount:number) {
+    const {data} = await supabase
+      .from(`${table}`)
+      .select(`*`)
+      .order('message_id', { ascending: false })
+      .limit(ammount)
+      
+    return data as T 
+  }
   
  export async function getTheCount<T>(table:string) {
   const { data, count } = await supabase
@@ -24,6 +34,8 @@ import { supabase } from '../databaseClient'
     .select('*', { count: 'exact' })
     return count as T 
   }
+
+
   
 
   export default fetchUser;

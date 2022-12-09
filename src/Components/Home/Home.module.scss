@@ -42,9 +42,32 @@
     padding: 20px 10px;
     width: 700px;
     height: 80vh;
-    @include center;
-
+    display: flex;
+    align-items: center;
     flex-direction: column;
+    // gap: 30px;
+}
+
+.loadMore {
+    font-family: $montserrat;
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.437);
+
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+
+    &:hover {
+        color: rgba(255, 255, 255, 0.69);
+    }
+}
+
+.messagesResult {
+    margin-top: 30px;
+    width: 100vw;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
     gap: 30px;
 }
 
@@ -113,9 +136,13 @@
     .inputMessage {
         width: 100vw;
         border-radius: 0%;
-        
+
         .textArea {
             font-size: 14px;
         }
+    }
+
+    .loadMore {
+        font-size: 16px;
     }
 }

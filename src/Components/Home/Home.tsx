@@ -1,6 +1,6 @@
 import Container from "../UtilityComponents/Container/Container"
 import Logoff from "../UtilityComponents/Logoff/Logoff"
-import { fetchAllRows, getTheCount } from "../../Controllers/FilterAPI"
+import { fetchAllRows, fetchSomeRows, getTheCount } from "../../Controllers/FilterAPI"
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import MessageBox from "../UtilityComponents/MessageBox/MessageBox";
 import styles from "./Home.module.scss"
@@ -9,6 +9,7 @@ import { useFormik } from "formik";
 import { FiSend } from "react-icons/fi";
 import { CiPause1 } from "react-icons/ci";
 import { Messages } from "../../types";
+import { AiOutlineReload } from "react-icons/ai";
 
 
 
@@ -19,26 +20,31 @@ function Home() {
   const [username, setUsername] = useState("")
   const [refresh, setRefresh] = useState(false)
   const [pause, setPause] = useState(false)
-  const [countOfDS, setCountOfDS] = useState<number>()
+  const [countOfDS, setCountOfDS] = useState<number>(0)
+  const [ammount, setAmmount] = useState(6)
 
+  /*    bottom element for focus view on last message if there's  */
   const bottom = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     bottom.current?.scrollIntoView({behavior: 'smooth'})
   }, [data])
 
+  /*    If new messages on DS - fetch and render  */
   useEffect(() => {
     if(countOfDS !== data.length) {
-    fetchAllRows<Messages[]>('messages').then(data => {
+    fetchSomeRows<Messages[]>('messages', ammount).then(data => {
       setData(data)
     })}
-  }, [countOfDS])
+  }, [countOfDS, ammount])
 
+
+  /*  Check if there's new messages in DS in every 200ms   */
   useEffect(() => {
     if(!pause)
     {setTimeout(() => {
       setRefresh(!refresh)
-    }, 500)}
+    }, 200)}
   }, [refresh, pause])
 
   useEffect(() => {
@@ -46,7 +52,7 @@ function Home() {
   }, [refresh])
 
 
-  /*  Wyciąganie username na podstawie user_id  */
+  /*  Getting username by user_id  */
   const getUserID = async () => getUSER()
     .then(data => {
       setUserId(data?.id ? data.id : "")
@@ -88,21 +94,25 @@ function Home() {
 
           <p className={styles.accountUsername}>{username}</p>
           <div className={styles.boxField} id="boxField">
-
-            {data.map((element, index) => 
-            {    
-              return (
-                <MessageBox 
-                username={userId === element.user_id  ? "You" : String(element.username)} 
-                message={element.comment ? element.comment : ""} 
-                createdAt={element.created_at ? String(getFormattedDate(element.created_at)) : ""} 
-                isAuthor={userId === element.user_id}
-                key = {index}
-                />
-              )
+            {countOfDS > data.length && 
+            <button onClick={() => setAmmount(prev => prev += 6)} className={styles.loadMore}>Load more <AiOutlineReload /></button>
             }
-            )} 
-            <div ref={bottom} />
+            <div className={styles.messagesResult}>
+              {data.map((element, index) => 
+              {    
+                return (
+                  <MessageBox 
+                  username={userId === element.user_id  ? "You" : String(element.username)} 
+                  message={element.comment ? element.comment : ""} 
+                  createdAt={element.created_at ? String(getFormattedDate(element.created_at)) : ""} 
+                  isAuthor={userId === element.user_id}
+                  key = {index}
+                  />
+                )
+              }
+              )} 
+              </div>
+              <div ref={bottom} />
           </div>
 
           <form className={styles.inputMessage} onSubmit={messageFormik.handleSubmit}>
